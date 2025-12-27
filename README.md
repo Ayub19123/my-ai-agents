@@ -1,15 +1,42 @@
-# 🤖 Multi-Agent Industrial Research Crew
-Built with **CrewAI** and **Google Gemini 2.5 Flash**.
+# 🌐 Global Agent Assembly Line  
+**Industrial Intelligence. Automated.**
 
-## 🚀 Overview
-This project uses an agentic workflow to research complex industrial standards like **OpenUSD 1.0** and generate professional LinkedIn content.
+The world's first autonomous research engine for high-stakes industrial strategy.  
+Built with CrewAI, Gemini 2.5 Flash, and sovereign-grade agent orchestration.
 
-## 🏗️ Technical Architecture
-- **Framework:** CrewAI (Agentic Orchestration)
-- **Model:** Gemini 2.5 Flash (Native Google Generative AI)
-- **Configuration:** YAML-based agent/task separation
-- **Security:** Environment-based secret management (`.env`)
+---
 
+## 🏗️ Architecture Overview
+
+This system operates like an industrial assembly line:
+
+1. **Researcher Agent**  
+   Searches the live web using DuckDuckGo  
+   Extracts raw findings on any topic
+
+2. **Strategist Agent**  
+   Synthesizes findings into a 5-point strategic summary  
+   Outputs C-Suite-ready insights
+
+3. **Streamlit UI**  
+   Accepts topic input  
+   Launches autonomous mission  
+   Displays and saves the final report
+
+---
+
+## 🎯 Mission Statement
+
+> To bridge the gap between raw web data and actionable industrial strategy — autonomously.
+
+---
+
+## 🚀 Installation & Launch
+
+### 1. Clone the repo
+```bash
+git clone https://github.com/Ayub19123/my-ai-agents.git
+cd my-ai-agents
 ## 📁 Project Structure
 - `agents.yaml`: Defines agent roles and personas.
 - `main_from_yaml.py`: The execution engine.
@@ -18,4 +45,5 @@ This project uses an agentic workflow to research complex industrial standards l
 ## 🛠️ How to Run
 1. Install requirements: `pip install -r requirements.txt`
 2. Add your `GEMINI_API_KEY` to a `.env` file.
+
 3. Run: `python main_from_yaml.py`
