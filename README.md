@@ -74,6 +74,14 @@ Includes:
 • 	Direct consultation
 • 	Continuous optimization
 
+
+🔐 Security Policy
+
+If you discover a vulnerability, please email ayubpandith04@gmail.com.  
+We will review and respond within 48 hours.  
+See full policy → [SECURITY.md](SECURITY.md)
+
+
 📩 Contact
    Ayubpandih04@gmail.com
 
@@ -81,5 +89,6 @@ Includes:
 Submit your mission to activate your sovereign seat:
 
 https://docs.google.com/forms/d/e/1FAIpQLSd9LxBCm6IQAl_aMC-n__CmRUECxq__s0_ObqyMVKLnT17uDA/viewform?usp=header
+
 
 
