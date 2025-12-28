@@ -47,3 +47,39 @@ cd my-ai-agents
 2. Add your `GEMINI_API_KEY` to a `.env` file.
 
 3. Run: `python main_from_yaml.py`
+What Our Agents Do
+The Global Agent Assembly Line is a sovereign multi‑agent intelligence system engineered for industrial simulation, OpenUSD workflows, and high‑stakes technical audits.
+Audit Agent
+• 	Performs structural USD validation
+• 	Detects anomalies and missing metadata
+• 	Flags issues in seconds instead of hours
+Optimizer Agent
+• 	Refines USD stages
+• 	Improves performance and structure
+• 	Prepares scenes for simulation and pipelines
+Reporting Agent
+• 	Generates high‑signal Tactical Intelligence Reports
+• 	Converts raw agent output into executive‑ready insights
+Custom Agents
+• 	Built on demand
+• 	Tailored to enterprise workflows, pipelines, and industrial needs
+Together, these agents replace 40+ hours of manual engineering with a 180‑second intelligence cycle.
+
+💰 Price
+$499/month per sovereign seat
+Includes:
+• 	Monthly mission capacity
+• 	Custom agent development
+• 	Tactical reports
+• 	Direct consultation
+• 	Continuous optimization
+
+📩 Contact
+Your Gmail here
+
+🔗 Onboarding Form
+Submit your mission to activate your sovereign seat:
+[https://docs.google.com/forms/d/e/1FAIpQLSd9LxBCm6IQAl_aMC-n__CmRUECxq__s0_ObqyMVKLnT17uDA/viewform?usp=header]
+GMAIL:Ayubpandith04@gmail.com
+
+
