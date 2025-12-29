@@ -50,11 +50,11 @@ This is a real-world example of how your enterprise can leverage autonomous agen
 
 Agents include:
 
-- **Research Agent** — Industrial intelligence and data synthesis  
-- **Technical Analyst Agent** — Pipeline & workflow analysis  
-- **OpenUSD Specialist Agent** — Asset hierarchy mapping  
-- **Digital Twin Strategist Agent** — Simulation & strategy generation  
-- **Synthesis Agent** — Final report & tactical recommendations
+-*Research Agent** — Industrial intelligence and data synthesis  
+- Technical Analyst Agent** — Pipeline & workflow analysis  
+ *OpenUSD Specialist Agent** — Asset hierarchy mapping  
+- *Digital Twin Strategist Agent** — Simulation & strategy generation  
+- *Synthesis Agent** — Final report & tactical recommendations
 
 Each agent is a gear in the Assembly Line, working together to produce industrial-grade intelligence.
 
@@ -73,12 +73,12 @@ Developers and early adopters can run the system directly, while enterprises can
  🚀 Quick Start
 
 ```bash
-# Install dependencies
+ Install dependencies
 pip install -r requirements.txt
 
-# Add your GEMINI_API_KEY to a .env file
+ Add your GEMINI_API_KEY to a .env file
 
-# Run the system
+ Run the system
 python main_from_yaml.py
 
 Perfect, partner — the link is clean, valid, and ready to embed.
@@ -125,7 +125,7 @@ Learn how our agents optimize workflows, map OpenUSD pipelines, generate actiona
 This is a real-world example of how your enterprise can leverage autonomous agents to streamline operations and reduce bottlenecks.
 
 ---
-# 💼 How to Engage / Hire Us
+ 💼 How to Engage / Hire Us
 
 | Tier | Description | CTA |
 |------|-------------|-----|
@@ -141,11 +141,11 @@ This is a real-world example of how your enterprise can leverage autonomous agen
 
 Agents include:
 
-- **Research Agent** — Industrial intelligence and data synthesis  
-- **Technical Analyst Agent** — Pipeline & workflow analysis  
-- **OpenUSD Specialist Agent** — Asset hierarchy mapping  
-- **Digital Twin Strategist Agent** — Simulation & strategy generation  
-- **Synthesis Agent** — Final report & tactical recommendations
+- *Research Agent** — Industrial intelligence and data synthesis  
+- *Technical Analyst Agent** — Pipeline & workflow analysis  
+- *OpenUSD Specialist Agent** — Asset hierarchy mapping  
+- *Digital Twin Strategist Agent** — Simulation & strategy generation  
+- *Synthesis Agent** — Final report & tactical recommendations
 
 Each agent is a gear in the Assembly Line, working together to produce industrial-grade intelligence.
 
@@ -164,12 +164,12 @@ Developers and early adopters can run the system directly, while enterprises can
  🚀 Quick Start
 
 ```bash
-# Install dependencies
+ Install dependencies
 pip install -r requirements.txt
 
-# Add your GEMINI_API_KEY to a .env file
+ Add your GEMINI_API_KEY to a .env file
 
-# Run the system
+ Run the system
 python main_from_yaml.py
 
 
@@ -182,3 +182,4 @@ python main_from_yaml.py
 - Beacon: https://beacons.ai/guddies
 - Request Tactical Report / Book a Seat
 https://docs.google.com/forms/d/e/1FAIpQLSd9LxBCm6IQAl_aMC-n__CmRUECxq__s0_ObqyMVKLnT17uDA/viewform?usp=header
+
