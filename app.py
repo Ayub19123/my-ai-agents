@@ -1,22 +1,24 @@
 import gradio as gr
 import pandas as pd
+import time
 
-# This is your Sovereign Milestone Data
-marathon_data = {
-    "Metric": ["Total Uptime", "Memory Baseline", "Peak Memory", "Status"],
-    "Value": ["6 Hours (Continuous)", "84.9% - 86.2%", "94.2% (Recovered)", "HEALTHY"]
-}
+# Dashboard Layer: Telemetry Panel Starter
+def get_telemetry():
+    # This will eventually pull from your real stress_test logs
+    data = {
+        "Metric": ["CPU Usage", "Memory Usage", "System Status", "Cycle Count"],
+        "Value": ["47.0%", "86.2%", "HEALTHY", "1800+"]
+    }
+    return pd.DataFrame(data)
 
-df = pd.DataFrame(marathon_data)
-
-with gr.Blocks(title="Global Agent Assembly Line") as demo:
+with gr.Blocks(title="Sovereign Command Center") as demo:
     gr.Markdown("# 🏛️ Global Agent Assembly Line")
-    gr.Markdown("### 6-Hour Autonomous Stress Test Milestone")
+    gr.Markdown("### 📊 Real-Time Telemetry & Reflex Arc Monitor")
     
     with gr.Row():
-        gr.DataFrame(df, label="Industrial Telemetry Proof")
-        
+        telemetry_table = gr.DataFrame(get_telemetry(), label="Live System Pulse")
+    
     gr.Markdown("---")
-    gr.Markdown("🛠️ **Status**: Installation Phase. Currently syncing local logs to cloud dashboard.")
+    gr.Markdown("🛠️ **Hangar Status**: Dashboard Layer Initialized. Monitoring 6-Hour Stress Test.")
 
 demo.launch()
