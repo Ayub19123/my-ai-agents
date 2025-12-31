@@ -1,4 +1,3 @@
-crewai
-pyyaml
-python-dotenv
-google-genai
+gradio
+pandas
+plotly
