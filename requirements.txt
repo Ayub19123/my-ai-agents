@@ -1,3 +1,6 @@
-gradio
+openai
+python-dotenv
 pandas
-plotly
+numpy
+gradio
+requests
