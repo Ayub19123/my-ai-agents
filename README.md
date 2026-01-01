@@ -115,4 +115,8 @@ The system is organized into **40 layers**, grouped into conceptual bands:
 
    ```bash
    git clone https://github.com/<your-username>/global-agent-assembly-line.git
+
    cd global-agent-assembly-line
+   ![legacy](https://github.com/user-attachments/assets/d61e1d63-ff26-4137-9a86-f560e8fa5ffd)
+
+
