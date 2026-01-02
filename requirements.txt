@@ -2,5 +2,5 @@ openai
 python-dotenv
 pandas
 numpy
-gradio
+gradio==4.44.1
 requests
