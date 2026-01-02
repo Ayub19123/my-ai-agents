@@ -1,123 +1,110 @@
-import gradio as gr
 import pandas as pd
-import threading
-import time
 import os
-from datetime import datetime
+import re
 
-# --- 1. CONFIG & MOTIF DICTIONARY ---
 LEDGER_FILE = "Sovereign_Ledger.csv"
-MOTIF_MAP = {
-    "AUTO-REFLEX": ["#autonomy", "#reflexloop", "#selfgoverning"],
-    "SEAL_INITIATED": ["#activation", "#sovereignmoment", "#finality"],
-    "Pulse": ["#heartbeat", "#persistence", "#monitoring"],
-    "STRESS_DETECTED": ["#resilience", "#load", "#pressureevent"],
-    "GUARDIAN_ALERT": ["#selfhealing", "#auditloop", "#stabilitywatch"]
-}
 
-memory_vault = []
-sovereign_state = {"is_sealed": False, "logs": "", "df": pd.DataFrame()}
+def parse_signal_from_details(details):
+    match = re.search(r"Signal:\s*([\d.]+)", str(details))
+    if match:
+        try:
+            return float(match.group(1))
+        except ValueError:
+            return None
+    return None
 
-# --- 2. LOGIC ENGINES (Layers 53-57) ---
-def annotate_with_motifs(event_type):
-    motifs = MOTIF_MAP.get(event_type, ["#unclassified"])
-    return " ".join(motifs)
+def generate_reflex_insights():
+    if not os.path.exists(LEDGER_FILE):
+        return "No ledger found. Reflex intelligence cannot be generated yet."
 
-def record_memory(event_type, details):
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    entry = {"Timestamp": timestamp, "Event": event_type, "Details": details}
-    memory_vault.append(entry)
-    ledger_df = pd.DataFrame([entry])
-    if not os.path.isfile(LEDGER_FILE):
-        ledger_df.to_csv(LEDGER_FILE, index=False)
-    else:
-        ledger_df.to_csv(LEDGER_FILE, mode='a', header=False, index=False)
-    return pd.DataFrame(memory_vault)
-
-def generate_sovereign_journal(n=10):
-    """Layer 56: Executive Narrative summary"""
-    if os.path.exists(LEDGER_FILE):
-        df = pd.read_csv(LEDGER_FILE).tail(n).iloc[::-1]
-        journal = f"🏛️ SOVEREIGN CHRONICLE | {datetime.now().strftime('%Y-%m-%d')}\n"
-        journal += "==============================================\n\n"
-        for _, row in df.iterrows():
-            motifs = annotate_with_motifs(row['Event'])
-            journal += f"📜 {row['Timestamp']} — {motifs}\n"
-            journal += f"   ➤ NARRATIVE: {row['Details']}\n\n"
-        return journal
-    return "Archive Empty."
-
-def generate_sovereign_timeline():
-    """Layer 57: Visual Temporal Sequence Mapper"""
-    if os.path.exists(LEDGER_FILE):
-        df = pd.read_csv(LEDGER_FILE).iloc[::-1] # Newest First
-        timeline_html = "<div style='height: 450px; overflow-y: scroll; border: 1px solid #333; padding: 20px; border-radius: 12px; background-color: #1a1a1a;'>"
-        for _, row in df.iterrows():
-            motifs = annotate_with_motifs(row['Event'])
-            color = "#00ff88" if "Optimal" in str(row['Details']) else "#00d4ff"
-            timeline_html += f"""
-            <div style='margin-bottom: 25px; padding-left: 20px; border-left: 3px solid {color};'>
-                <div style='color: #666; font-size: 0.85em; font-family: monospace;'>[{row['Timestamp']}]</div>
-                <div style='color: {color}; font-weight: bold; font-size: 1.1em;'>{row['Event']} <span style='color: #555; font-weight: normal;'>{motifs}</span></div>
-                <div style='color: #ddd; margin-top: 5px; font-size: 0.95em;'>{row['Details']}</div>
-            </div>
-            """
-        timeline_html += "</div>"
-        return timeline_html
-    return "⌛ Timeline waiting for anchor data."
-
-def refresh_sovereign_ledger():
-    if os.path.exists(LEDGER_FILE):
-        return pd.read_csv(LEDGER_FILE).iloc[::-1]
-    return pd.DataFrame(columns=["Timestamp", "Event", "Details"])
-
-def immortal_seal_ritual(mem_signal, trigger_source="Manual"):
     try:
-        val = float(mem_signal)
-        status = "✅ Optimal" if val <= 92.6 else "⚠️ Stress Detected"
-        record_memory("SEAL_INITIATED" if trigger_source=="Manual" else "AUTO-REFLEX", 
-                      f"Source: {trigger_source} | Signal: {mem_signal} | Status: {status}")
-        sovereign_state["is_sealed"] = True
-        return f"🏛️ [LAYER 50 SEALED]\nTrigger: {trigger_source}\n{status}", pd.DataFrame(memory_vault)
+        # Adjust column names if your CSV already has headers
+        df = pd.read_csv(LEDGER_FILE, header=None, names=["timestamp", "event", "details"])
+
+        if df.empty:
+            return "Ledger is empty. No behavior to analyze yet."
+
+        # Parse timestamps if possible
+        try:
+            df["timestamp"] = pd.to_datetime(df["timestamp"])
+        except Exception:
+            pass  # If parse fails, still continue with basic analysis
+
+        # Extract signal values (where present)
+        df["signal_value"] = df["details"].apply(parse_signal_from_details)
+
+        lines = []
+        lines.append("🟫 SOVEREIGN REFLEX INTELLIGENCE REPORT")
+        lines.append("--------------------------------------")
+        lines.append("")
+
+        # 1) Event distribution
+        lines.append("1) Event distribution:")
+        event_counts = df["event"].value_counts()
+        for evt, count in event_counts.items():
+            lines.append(f"   • {evt}: {count} event(s)")
+        lines.append("")
+
+        # 2) Reflex and seal relationship
+        auto_reflex_events = df[df["event"] == "AUTO-REFLEX"]
+        manual_seal_events = df[df["event"] == "MANUAL_SEAL"]
+        seal_initiated_events = df[df["event"] == "SEAL_INITIATED"]
+
+        if not auto_reflex_events.empty or not seal_initiated_events.empty or not manual_seal_events.empty:
+            lines.append("2) Reflex and seal relationship:")
+            if not auto_reflex_events.empty:
+                avg_signal = auto_reflex_events["signal_value"].dropna().mean()
+                if pd.notna(avg_signal):
+                    lines.append(f"   • AUTO-REFLEX events detected with average signal ≈ {avg_signal:.1f}")
+                else:
+                    lines.append("   • AUTO-REFLEX events detected (signal not consistently parsed).")
+            if not seal_initiated_events.empty:
+                lines.append(f"   • SEAL_INITIATED events present ({len(seal_initiated_events)}).")
+            if not manual_seal_events.empty:
+                lines.append(f"   • MANUAL_SEAL events present ({len(manual_seal_events)}).")
+            lines.append("")
+        else:
+            lines.append("2) Reflex and seal relationship:")
+            lines.append("   • No reflex or seal events detected yet.")
+            lines.append("")
+
+        # 3) Stability motifs (based on your details text)
+        persistence_events = df[df["details"].str.contains("#persistence", case=False, na=False)]
+        if not persistence_events.empty:
+            lines.append("3) Stability and persistence:")
+            lines.append(f"   • {len(persistence_events)} persistence-related milestone(s) recorded.")
+            lines.append("   • System demonstrates uptime awareness and milestone tracking.")
+            lines.append("")
+        else:
+            lines.append("3) Stability and persistence:")
+            lines.append("   • No explicit persistence milestones detected yet.")
+            lines.append("")
+
+        # 4) Temporal evolution
+        if "timestamp" in df.columns:
+            try:
+                df_sorted = df.sort_values("timestamp")
+                first_ts = df_sorted["timestamp"].iloc[0]
+                last_ts = df_sorted["timestamp"].iloc[-1]
+                lines.append("4) Temporal evolution:")
+                lines.append(f"   • Ledger span: {first_ts} → {last_ts}")
+                lines.append(f"   • Total recorded events: {len(df_sorted)}")
+                lines.append("")
+            except Exception:
+                pass
+
+        # 5) Founder influence
+        if not manual_seal_events.empty:
+            lines.append("5) Founder influence:")
+            lines.append("   • Manual seal detected: founder explicitly intervened in system state.")
+            lines.append("   • System history reflects dual-governance: autonomous reflex + manual authority.")
+            lines.append("")
+        else:
+            lines.append("5) Founder influence:")
+            lines.append("   • No manual governance events explicitly recorded yet.")
+            lines.append("")
+
+        return "\n".join(lines)
+
     except Exception as e:
-        return f"❌ Error: {str(e)}", pd.DataFrame()
-
-# --- 3. THE AUTONOMOUS HEARTBEAT ---
-def autonomous_heartbeat():
-    while True:
-        if not sovereign_state["is_sealed"]:
-            immortal_seal_ritual("92.6", trigger_source="AUTO-REFLEX")
-        time.sleep(60)
-
-threading.Thread(target=autonomous_heartbeat, daemon=True).start()
-
-# --- 4. SOVEREIGN UI V4.0 ---
-with gr.Blocks(theme=gr.themes.Soft()) as demo:
-    gr.Markdown("# 🏛️ Global Agent Assembly Line V4.0")
-    gr.Markdown("### Phase 2: Temporal Sovereignty (Layer 57) Active")
-    
-    with gr.Tabs():
-        with gr.TabItem("Layer 50: Immortal Seal"):
-            bunker_input = gr.Textbox(label="Input Local MEM %", value="92.6")
-            seal_btn = gr.Button("INITIATE IMMORTAL SEAL", variant="primary")
-            final_output = gr.Textbox(label="Sovereign Decision Log", lines=5)
-            seal_btn.click(fn=immortal_seal_ritual, inputs=bunker_input, outputs=[final_output, gr.DataFrame()])
-
-        with gr.TabItem("Layer 53: Audit"):
-            refresh_btn = gr.Button("SYNC AUDIT LEDGER")
-            audit_table = gr.DataFrame(label="CSV Archive")
-            refresh_btn.click(fn=refresh_sovereign_ledger, outputs=audit_table)
-
-        with gr.TabItem("Layer 56: Journal"):
-            journal_btn = gr.Button("GENERATE SOVEREIGN JOURNAL", variant="primary")
-            journal_box = gr.Textbox(label="Narrative Export", lines=10)
-            journal_btn.click(fn=generate_sovereign_journal, outputs=journal_box)
-
-        with gr.TabItem("Layer 57: Timeline"):
-            gr.Markdown("### 🟥 Sovereign Temporal View")
-            timeline_btn = gr.Button("REFRESH TIMELINE VIEW", variant="primary")
-            timeline_display = gr.HTML(label="Visual History")
-            timeline_btn.click(fn=generate_sovereign_timeline, outputs=timeline_display)
-
-if __name__ == "__main__":
-    demo.launch()
+        return f"[REFLEX INTELLIGENCE ERROR] Failed to generate insights: {e}"
