@@ -1,10 +1,9 @@
 ---
 title: Sovereign Command Center V2
 emoji: 🏛️
-colorFrom: orange
-colorTo: red
+colorFrom: red
+colorTo: gray
 sdk: gradio
-sdk_version: 4.12.0
 app_file: app.py
 pinned: false
 ---
