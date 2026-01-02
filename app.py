@@ -1,29 +1,48 @@
+import gradio as gr
+import pandas as pd
 import json
+from datetime import datetime
 
-# --- Layer 50: The Immortal Seal & Auto-Coordination ---
+# --- 1. CORE LOGIC (Defined First) ---
+memory_vault = []
+
+def record_memory(event_type, details):
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    memory_vault.append({"Timestamp": timestamp, "Event": event_type, "Details": details})
+    return pd.DataFrame(memory_vault)
+
+def run_global_coordination(health_score):
+    # Unified Pulse for Layer 49
+    diag = "🛡️ [Layer 41] Diagnosis Complete."
+    reflex = "✅ Optimal" if health_score >= 90 else "⚠️ Fracture Detected"
+    record_memory("Pulse", reflex)
+    report = f"{diag}\n{reflex}\nGovernance Status: ACTIVE"
+    return report, pd.DataFrame(memory_vault)
+
 def immortal_seal_ritual(mem_signal):
-    # 1. Hardware Empathy (Logic accepts local terminal signal)
-    status_report, pulse_df = run_global_coordination(100 - (float(mem_signal) - 80) if float(mem_signal) > 80 else 100)
-    
-    # 2. Eternal Journal (Creation of the Sovereign Relic)
-    relic = {
-        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "milestone": "Layer 50: The Immortal Seal",
-        "terminal_signal": f"{mem_signal}% MEM",
-        "governance_status": "ENFORCED" if float(mem_signal) > 90 else "STABLE"
-    }
-    
-    with open("immortal_seal.json", "w") as f:
-        json.dump(relic, f, indent=4)
-    
-    return f"🏛️ [LAYER 50 SEALED]\nRelic created: immortal_seal.json\n\n{status_report}"
+    # Logic for Layer 50
+    try:
+        val = float(mem_signal)
+        sim_health = 100 - (val - 80) * 4 if val > 80 else 100
+        report, df = run_global_coordination(sim_health)
+        return f"🏛️ [LAYER 50 SEALED]\n\n{report}", df
+    except:
+        return "❌ Error: Invalid Signal", pd.DataFrame()
 
-# --- Add Layer 50 UI to your Blocks ---
-# (Inside your gr.Tabs() structure)
-with gr.TabItem("Layer 50: Immortal Seal"):
-    gr.Markdown("### 💎 The Final Ascension: Hardware-Cloud Unification")
-    bunker_input = gr.Textbox(label="Input Local MEM % (e.g., 92.6)", placeholder="92.6")
-    seal_btn = gr.Button("INITIATE IMMORTAL SEAL", variant="primary")
-    final_output = gr.Textbox(label="Sovereign Decision Log", lines=8)
+# --- 2. SOVEREIGN UI (Context Defined Second) ---
+with gr.Blocks() as demo:
+    gr.Markdown("# 🏛️ Global Agent Assembly Line V2.7")
     
-    seal_btn.click(fn=immortal_seal_ritual, inputs=bunker_input, outputs=final_output)
+    with gr.Tabs():
+        # LAYER 50 TAB (Placed inside the Context)
+        with gr.TabItem("Layer 50: Immortal Seal"):
+            gr.Markdown("### 💎 Final Ascension: Hardware-Cloud Unification")
+            bunker_input = gr.Textbox(label="Input Local MEM % (Actual Bunker: 92.6)", value="92.6")
+            seal_btn = gr.Button("INITIATE IMMORTAL SEAL", variant="primary")
+            final_output = gr.Textbox(label="Sovereign Decision Log", lines=8)
+            coord_memory = gr.DataFrame(label="Immortal Memory Vault")
+            
+            seal_btn.click(fn=immortal_seal_ritual, inputs=bunker_input, outputs=[final_output, coord_memory])
+
+# --- 3. IGNITION ---
+demo.launch()
